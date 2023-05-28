@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  {% if not results %}
+    <p>No matches found.</p>
+  {% else %}
+    {% for  (i, filename, header, matches) in results %}
+      <h2>{{ filename }}</h2>
+      <p>{{ header }}</p>
+        {% for match in matches %}
+          <li>{{ match }}</li>
+        {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endblock %}

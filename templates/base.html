@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+  <title>Timeless Antiques</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+  </div>
+  {% block header %}
+  <button class="openbtn" onclick="openNav()" style="position:sticky">&#9776;</button>
+  <header>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Timeless Antiques">
+    <h1>Timeless Antiques</h1>
+    {% block search %}
+    <form action="{{ url_for('search') }}" method="POST">
+      <input type="text" name="search_input" placeholder="Search">
+      <button type="submit">Search</button>
+    </form>
+    {% endblock %}
+  </header>
+    
+  
+  <div id="main">
+      <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      
+      <aside>
+        <a class="open-button" id="add-item" onclick="openForm()" >Add Item</a>
+        <a class="delete-button" id="delete-item" onclick="openForm2()">Delete Item</a>
+        <a class="add-set-button" id="add-set" onclick="openForm3()">    Add Set</a>
+        <a class="delete-set-button" id="delete=set" onclick="openForm4()">Delete Set</a>
+      </aside>
+    
+    
+          <!--Add item -->
+        <div class = "form-popup" id="myForm">    
+          <form action="/add_items" method = "post" class="form-container" id="add_items">
+            <h1>Enter Details</h1>
+              
+            <label for="id"><b>ID no.</b></label>
+            <input type="text" placeholder="Enter ID number" name="item.id" required>
+            
+            <label for="desc"><b>Description</b></label>
+            <input type="text" placeholder="Enter item description" name="item.desc" required>
+            
+            <label for="price"><b>Price</b></label>
+            <input type="text" placeholder="Enter item price" name="item.price" required>
+            <input type="hidden" name="file_to_append_to"id="file_to_append_to" value="">
+              <button class="btn" onclick="submitForm()">Submit</button>
+    
+            <button type="button" class="btn cancel"
+            onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      
+    
+    
+        <!--Delete item-->
+          <div class = "form-popup" id="myForm2" onsubmit="handleitemdelete(event)">
+            <form action="/delete_item" method="post" class="form-container">
+              <h1>Enter Details</h1>
+              
+              <label for="id"><b>ID no.</b></label>
+              <input type="text" placeholder="Enter ID number" name="delete_id" required>
+              
+              <button type="submit" class="btn">Submit</button>
+              
+              <button type="button" class="btn cancel" 
+              onclick="closeForm2()">Close</button>
+            </form>
+          </div>
+    
+    
+    
+        <!--Add set-->    
+        <div class = "form-popup" id="myForm3">
+          
+          <form action="/add_sets" method="post" class="form-container" onsubmit="handlesetSubmit(event)">
+              <h1>Enter Details</h1>
+              
+              <label for="set-id"><b>Set ID no.</b></label>
+              <input type="text" placeholder="Enter set ID number" name="set-id" required>
+              
+              <label for="set-desc"><b>Set Description</b></label>
+              <input type="text" placeholder="Enter set description" name="set-desc" required>
+
+              <label for="set-price"><b>Set Price</b></label>
+              <input type="text" placeholder="Enter set price" name="set-price" required>
+              
+              <label for="iset-no"><b>Number of Items</b></label>
+              <input type="text" placeholder="Enter Number of Items" name="iset-no" required>
+              
+              <label for="id"><b>Item ID no.</b></label>
+              <input type="text" placeholder="Enter ID number" name="items-id" required>
+              
+                <div id="input-container">
+                    <label for="add-id"><b>additional Item ID no.</b></label>
+                    <input type="text" placeholder="Enter ID number" name="add-id">
+                </div>
+              
+              <button id="add-before-me" class="add-text-btn " onclick="addInput()">(+)</button>
+              
+              <button type="submit" class="btn">Submit</button>
+              
+              <button type="button" class="btn cancel" 
+              onclick="closeForm3()">Close</button>
+          </form>
+        </div>
+    
+    
+        <!--Delete Set-->
+        <div class = "form-popup" id="myForm4" onsubmit="handlesetdelete(event)">
+      
+          <form action="/delete_set" method ="post" class="form-container">
+            <h1>Enter Details</h1>
+            
+            <label for="set-id"><b>Set ID no.</b></label>
+            <input type="text" placeholder="Enter set ID number" name="set-id" required>
+            
+            <button type="submit" class="btn">Submit
+            </button>
+            
+            <button type="button" class="btn cancel" 
+            onclick="closeForm4()">Close</button>
+          
+          
+          </form>
+          </div> 
+        </div>
+  {% endblock %}
+
+  {% block content %}{% endblock %}
+
+  {% block sidebar %}
+
+
+  </aside>
+  {% endblock %}
+
+  {% block footer %}
+  <footer>
+    <p>Copyright © 2023 Timeless Antiques
+  </footer>
+  {% endblock %}
+</body>
+
+</html>

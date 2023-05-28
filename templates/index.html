@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if not results %}
+  <p>No matches found.</p>
+{% else %}
+  {% for  (filename, header, matches) in results %}
+    <div id = "index-html-page-div1">
+      {% for match in matches %}
+      <hr class="divider">
+      <div class="item">
+        <img src="{{ url_for('static', filename='ANTIQUES.jpg')}}" alt="{{match}}">
+        <h4>{{match}}</h4>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+  </div>
+  {% endfor %}
+  <span style="text-align:center; color:black; font-size:1.3em; font-style:italic;"><h1> Sets </h1></span>
+  {% for  (filename, header, matches) in results2 %}
+    <div id = "index-html-page-div1">
+      {% for match in matches %}
+      <hr class="divider">
+      <div class="item">
+        <img src="{{ url_for('static', filename='sets.jfif')}}" alt="{{match}}">
+        <h4>{{match}}</h4>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+  </div>
+  {% endfor %}
+{% endif %}
+{% endblock %}
